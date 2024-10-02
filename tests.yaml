@@ -1,0 +1,54 @@
+version: 2
+
+models:
+  - name: trial_goals
+    description: "Model that tracks whether organizations have completed each trial goal"
+    columns:
+      - name: organization_id
+        tests:
+          - not_null
+          - unique
+      - name: shift_created
+        tests:
+          - not_null
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: 0
+              max_value: 1
+      - name: employee_invited
+        tests:
+          - not_null
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: 0
+              max_value: 1
+      - name: punch_in
+        tests:
+          - not_null
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: 0
+              max_value: 1
+      - name: punch_in_approved
+        tests:
+          - not_null
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: 0
+              max_value: 1
+      - name: advanced_features_viewed
+        tests:
+          - not_null
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: 0
+              max_value: 1
+
+  - name: trial_activation
+    description: "Model that tracks whether organizations have fully activated by completing all trial goals"
+    columns:
+      - name: organization_id
+        tests:
+          - not_null
+          - unique
+      - name: trial_activated
+        tests:
+          - not_null
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: 0
+              max_value: 1
